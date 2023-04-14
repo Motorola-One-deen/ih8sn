@@ -13,10 +13,18 @@ else
   CONFIG=$DEFAULT_CONFIG
 fi
 
+SDKVERSION=$(getprop ro.build.version.sdk)
+LIBKEYSTORE=libkeystore-attestation-application-id.so
+
 ui_print "Copying files"
 unzip -qq "$ZIP" system/etc/init/ih8sn.rc system/addon.d/60-ih8sn.sh system/bin/ih8sn -d "${SYSTEM_MNT}/"
 
 ui_print "Using ih8sn config: $CONFIG"
 unzip -qqp "$ZIP" $CONFIG > "${SYSTEM_MNT}/$DEFAULT_CONFIG"
+
+if [[ `unzip -l $ZIP | grep $SDKVERSION/$LIBKEYSTORE$` ]] && grep -q '^FORCE_BASIC_ATTESTATION=1$' "${SYSTEM_MNT}/$CONFIG"; then
+  ui_print "Using basic attestation patched lib"
+  unzip -qq "$ZIP" /system/lib64/$SDKVERSION/$LIBKEYSTORE -d "${SYSTEM_MNT}/"
+fi
 
 install_done

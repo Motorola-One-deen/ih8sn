@@ -30,14 +30,24 @@ MODEL=$(adb shell getprop ro.product.model)
 SERIALNO=$(adb shell getprop ro.boot.serialno)
 PRODUCT=$(adb shell getprop ro.build.product)
 
-if [[ -f "system/etc/ih8sn.conf.${SERIALNO}" ]]; then
-    adb wait-for-device push system/etc/ih8sn.conf.${SERIALNO} /system/etc/ih8sn.conf
-elif [[ -f "system/etc/ih8sn.conf.${MODEL}" ]]; then
-    adb wait-for-device push system/etc/ih8sn.conf.${MODEL} /system/etc/ih8sn.conf
-elif [[ -f "system/etc/ih8sn.conf.${PRODUCT}" ]]; then
-    adb wait-for-device push system/etc/ih8sn.conf.${PRODUCT} /system/etc/ih8sn.conf
+DEFAULT_CONFIG=system/etc/ih8sn.conf
+if [[ -f "$DEFAULT_CONFIG.${MODEL}" ]]; then
+    CONFIG=$DEFAULT_CONFIG.${MODEL}
+elif [[ -f "$DEFAULT_CONFIG.${SERIALNO}" ]]; then
+    CONFIG=$DEFAULT_CONFIG.${SERIALNO}
+elif [[ -f "$DEFAULT_CONFIG.${PRODUCT}" ]]; then
+    CONFIG=$DEFAULT_CONFIG.${PRODUCT}
 else
-    adb wait-for-device push system/etc/ih8sn.conf /system/etc/
+    CONFIG=$DEFAULT_CONFIG
+fi
+
+adb wait-for-device push $CONFIG /system/etc/
+
+sdk_version=$(adb shell getprop ro.build.version.sdk)
+libkeystore="libkeystore-attestation-application-id.so"
+
+if [[ -f "system/lib64/$sdk_version/$libkeystore" ]] && grep -q '^FORCE_BASIC_ATTESTATION=1$' "$CONFIG"; then
+    adb wait-for-device push "system/lib64/$sdk_version/$libkeystore" /system/lib64/
 fi
 
 if [[ "${REBOOT}" = "1" ]]; then
