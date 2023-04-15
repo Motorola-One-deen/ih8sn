@@ -61,6 +61,8 @@ PRODUCT_NAME=OnePlus7Pro
 PRODUCT_FIRST_API_LEVEL=29
 ```
 
+- Note that if you set FORCE_BASIC_ATTESTATION=1, this will also copy patched `libkeystore-attestation-application-id.so` to your system. Patch can be found [here](patches)
+
 Notes:
 - Use # or remove it from config to disable spoofing that property.
 - You don't need to spoof all the properties.
