@@ -24,6 +24,11 @@ git clone https://github.com/LOS-Munch/ih8sn ih8sn
 $(call inherit-product-if-exists, ih8sn/product.mk)
 ```
 
+### 3: Apply patches
+```
+curl https://raw.githubusercontent.com/althafvly/ih8sn/master/patch.sh | bash
+```
+
 ## Requirements for recovery/adb root
 
 - Android platform tools
