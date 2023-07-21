@@ -11,5 +11,5 @@ PRODUCT_COPY_FILES += \
     ih8sn/system/etc/ih8sn.conf.$(subst lineage_,,$(TARGET_PRODUCT)):$(TARGET_COPY_OUT_SYSTEM)/etc/ih8sn.conf
 else
 PRODUCT_COPY_FILES += \
-    ih8sn/system/etc/ih8sn.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/ih8sn.conf
+    ih8sn/system/etc/ih8sn.conf.walleye:$(TARGET_COPY_OUT_SYSTEM)/etc/ih8sn.conf.walleye
 endif
