@@ -16,7 +16,7 @@
 
 ### 1: Clone ih8sn repo
 ```
-git clone https://github.com/LOS-Munch/ih8sn ih8sn
+git clone https://github.com/Motorola-One-deen/ih8sn ih8sn
 ```
 
 ### 2: Include makefile
@@ -26,7 +26,7 @@ $(call inherit-product-if-exists, ih8sn/product.mk)
 
 ### 3: Apply patches
 ```
-curl https://raw.githubusercontent.com/althafvly/ih8sn/master/patch.sh | bash
+./ih8sn/patches/patch.sh
 ```
 
 ## Requirements for recovery/adb root

@@ -18,7 +18,7 @@ LIGHTBLUE='\033[1;34m'
 apply_patch() {
     echo -e "${GREEN}Downloading patch $2...${NOCOLOR}"
     cd "$PATCH_DIR" || exit
-    wget -O "$2" https://raw.githubusercontent.com/althafvly/ih8sn/master/patches/"$2" -q --show-progress
+    wget -O "$2" https://raw.githubusercontent.com/Motorola-One-deen/ih8sn/master/patches/"$2" -q --show-progress
     echo -e "${GREEN}.................${NOCOLOR}"
     echo -e "${GREEN}Applying patch...${NOCOLOR}"
     echo -e "${LIGHTBLUE}Target repo:${NOCOLOR} $1"
