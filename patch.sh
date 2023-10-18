@@ -39,3 +39,5 @@ apply_patch() {
 }
 
 apply_patch system/security 0001-keystore-Block-key-attestation-for-Google-Play-Servi.patch
+apply_patch frameworks/base 0001-spoof-build-fingerprint-for-google-play-services.patch
+apply_patch frameworks/base 0002-use-fingerprint-walleye-pixel-2.patch
